@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
@@ -26,7 +28,9 @@ class LoginService {
     var res = await http
         .post(loginUri, body: {"username": username, "password": password});
     if (res.statusCode == 200 || res.statusCode == 201) {
-      storage.write(key: "jwt", value: res.body);
+      Map<String, dynamic> jsonMap = jsonDecode(res.body);
+      String accessToken = jsonMap['access_token'];
+      storage.write(key: "jwt", value: accessToken);
       return res.body;
     }
     return null;

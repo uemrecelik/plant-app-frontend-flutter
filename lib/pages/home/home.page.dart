@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:term_project_mobile/entities/Plant.dart';
 import 'package:term_project_mobile/entities/User.dart';
+import 'package:term_project_mobile/pages/home/componets/CustomPlantPainter.dart';
 import 'package:term_project_mobile/pages/home/home.service.dart';
 import 'package:term_project_mobile/pages/home/sections/plantSlider.section.dart';
 import 'package:term_project_mobile/pages/login/login.servide.dart';
@@ -18,6 +19,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late User currentUser;
+  late List<Plant> userPlants;
+  bool isLoading = true;
   @override
   void initState() {
     super.initState();
@@ -26,25 +29,37 @@ class _HomePageState extends State<HomePage> {
 
   void getCurrentUser() async {
     currentUser = await HomeService().fetchUser();
-    getUserPlants();
+    getUserPlants(currentUser);
   }
 
-  void getUserPlants() async {
-    HomeService().fetchUsersPlants(currentUser);
+  void getUserPlants(user) async {
+    userPlants = await HomeService().fetchPlants(user) as List<Plant>;
+
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    return Scaffold(
-        body: SafeArea(
-            child: Container(
-      child: Column(
-        children: [
-          PlantSlider(),
-        ],
-      ),
-    )));
+    return isLoading
+        ? Center(child: CircularProgressIndicator())
+        : Scaffold(
+            body: SafeArea(
+                child: Container(
+            child: Center(
+              child: Column(
+                children: [
+                  const TemperatureCircle(temperature: 75),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  PlantSlider(plantList: userPlants),
+                ],
+              ),
+            ),
+          )));
   }
 }

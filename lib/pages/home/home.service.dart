@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -14,22 +15,37 @@ class HomeService {
   late List plants;
   late Plant plant;
 
-  Map<String, String> get headers => {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "Authorization":
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVtcmUiLCJzdWIiOjEsImlhdCI6MTY3ODIxNjQyNywiZXhwIjoxNjc4MjIwMDI3fQ.wE5QAmzBBq5fLeVvrghCfNQE3T71ZkZD1BkS64hqme8",
-      };
-
   Future<User> fetchUser() async {
-    var res = await http.get(dataUri, headers: headers);
-    print(User.fromJson(jsonDecode(res.body)));
-    return User.fromJson(jsonDecode(res.body));
+    final String? token = await storage.read(key: 'jwt');
+    String url = 'https://yu-term-project.herokuapp.com/user/user-info';
+
+    final response = await http.get(
+      Uri.parse(url),
+      headers: <String, String>{
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+    final User user = User.fromJson(jsonDecode(response.body));
+    return user;
   }
 
-  Future fetchUsersPlants(User user) async {
-    var res = await http.get(plantUri, headers: headers);
-    final Map<String, dynamic> data = json.decode(res.body)[0];
-    print(data);
+  Future<List> fetchPlants(User user) async {
+    final String? jwt = await storage.read(key: 'jwt');
+    String url = 'https://yu-term-project.herokuapp.com/plants';
+    String? token = jwt;
+
+    final response = await http.post(
+      Uri.parse(url),
+      headers: <String, String>{
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(user.toJson()),
+    );
+
+    return List<Map<String, dynamic>>.from(jsonDecode(response.body))
+        .map((plantJson) => Plant.fromJson(plantJson))
+        .toList();
   }
 }

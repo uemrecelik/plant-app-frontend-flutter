@@ -69,7 +69,7 @@ class PlantCard extends StatelessWidget {
                   ),
                   Spacer(),
                   Text(
-                    '\$$price',
+                    '$price',
                     style: Theme.of(context)
                         .textTheme
                         .button
