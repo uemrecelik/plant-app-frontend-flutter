@@ -19,14 +19,7 @@ class PlantSlider extends StatelessWidget {
           title: plantList[i].name,
           country: plantList[i].optimumHum.toString(),
           price: plantList[i].optimumTemp,
-          press: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => HomePage(),
-              ),
-            );
-          },
+          sensorId: plantList[i].sensorId,
         ),
       );
     }
