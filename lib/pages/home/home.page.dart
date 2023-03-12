@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:term_project_mobile/entities/Plant.dart';
 import 'package:term_project_mobile/entities/User.dart';
-import 'package:term_project_mobile/pages/home/componets/CustomPlantPainter.dart';
 import 'package:term_project_mobile/pages/home/home.service.dart';
 import 'package:term_project_mobile/pages/home/sections/plantSlider.section.dart';
 import 'package:term_project_mobile/pages/login/login.servide.dart';
 import 'package:http/http.dart' as http;
+
+import 'componets/graphCard.componet.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -52,7 +53,15 @@ class _HomePageState extends State<HomePage> {
             child: Center(
               child: Column(
                 children: [
-                  const TemperatureCircle(temperature: 75),
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Row(
+                      children: [
+                        graphCard(value: 60, isTemp: true),
+                        graphCard(value: 20, isTemp: false)
+                      ],
+                    ),
+                  ),
                   const SizedBox(
                     height: 15,
                   ),
