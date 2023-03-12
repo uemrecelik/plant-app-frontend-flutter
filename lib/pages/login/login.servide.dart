@@ -35,4 +35,21 @@ class LoginService {
     }
     return null;
   }
+
+  Future<bool> isLoggedIn() async {
+    final String? token = await storage.read(key: 'jwt');
+    String url = 'https://yu-term-project.herokuapp.com/user/user-info';
+
+    final response = await http.get(
+      Uri.parse(url),
+      headers: <String, String>{
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return true;
+    }
+    return false;
+  }
 }

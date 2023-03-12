@@ -7,6 +7,7 @@ import 'package:term_project_mobile/entities/Plant.dart';
 import 'package:term_project_mobile/entities/User.dart';
 import 'package:term_project_mobile/pages/home/home.service.dart';
 import 'package:term_project_mobile/pages/home/sections/plantSlider.section.dart';
+import 'package:term_project_mobile/pages/login/login.page.dart';
 import 'package:term_project_mobile/pages/login/login.servide.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -61,7 +62,14 @@ class _HomePageState extends State<HomePage> {
                   appBar: AppBar(
                     title: Text('Welcome ${currentUser.username}'),
                     backgroundColor: deepGreenColor,
-                    leading: const Icon(Icons.logout),
+                    leading: IconButton(
+                      icon: const Icon(Icons.logout),
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const LoginPage(),
+                        ));
+                      },
+                    ),
                   ),
                   body: SafeArea(
                     child: Container(
