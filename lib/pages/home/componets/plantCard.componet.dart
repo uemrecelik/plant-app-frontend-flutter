@@ -8,7 +8,6 @@ import 'package:http/http.dart' as http;
 
 import '../../../constants.dart';
 import '../../../entities/Sensor.dart';
-import '../../../entities/User.dart';
 import '../../login/login.servide.dart';
 
 class PlantCard extends StatelessWidget {

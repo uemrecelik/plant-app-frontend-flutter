@@ -1,10 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:term_project_mobile/pages/graph/graph.page.dart';
 import 'package:term_project_mobile/pages/home/home.page.dart';
+import 'package:term_project_mobile/pages/main/main.service.dart';
 import 'package:term_project_mobile/pages/robot/robot.page.dart';
 import 'package:term_project_mobile/pages/user/user.page.dart';
+
+import 'notification.service.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -19,6 +22,14 @@ class _MainPageState extends State<MainPage> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    Timer.periodic(const Duration(seconds: 30), (timer) {
+      MainService().checkForNotification();
     });
   }
 
