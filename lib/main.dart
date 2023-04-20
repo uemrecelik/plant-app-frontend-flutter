@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:term_project_mobile/pages/graph/graph.page.dart';
 import 'package:term_project_mobile/pages/home/home.page.dart';
 import 'package:term_project_mobile/pages/login/login.page.dart';
 import 'package:term_project_mobile/pages/main/main.page.dart';
 import 'package:term_project_mobile/pages/main/notification.service.dart';
+import 'package:term_project_mobile/pages/robot/robot.page.dart';
+import 'package:term_project_mobile/pages/user/user.page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: const LoginPage(),
+      home: const RobotPage(),
     );
   }
 }

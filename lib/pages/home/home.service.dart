@@ -48,4 +48,19 @@ class HomeService {
         .map((plantJson) => Plant.fromJson(plantJson))
         .toList();
   }
+
+  Future<User> getUserData(User user) async {
+    final String? token = await storage.read(key: 'jwt');
+    String url = 'https://yu-term-project.herokuapp.com/user';
+    final response = await http.get(
+      Uri.parse(url),
+      headers: <String, String>{
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    final User userData = User.fromJson(jsonDecode(response.body));
+    return userData;
+  }
 }

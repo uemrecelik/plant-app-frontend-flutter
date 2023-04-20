@@ -7,6 +7,7 @@ class Plant {
   final String imageUrl;
   final int userId;
   final DateTime createdAt;
+  final String description;
 
   Plant({
     required this.id,
@@ -17,6 +18,7 @@ class Plant {
     required this.imageUrl,
     required this.userId,
     required this.createdAt,
+    required this.description,
   });
 
   factory Plant.fromJson(Map<String, dynamic> json) {
@@ -29,6 +31,7 @@ class Plant {
       imageUrl: json['imageUrl'],
       userId: json['userId'],
       createdAt: DateTime.parse(json['created_at']),
+      description: json['description'],
     );
   }
 }

@@ -50,6 +50,7 @@ class PlantCard extends StatelessWidget {
       tempProvider.plantName = title;
       tempProvider.optimumTemp = price.toString();
       tempProvider.optimumHum = country;
+      tempProvider.latestUpdateDate = sensorList[lastIndex].createdAt;
     }
 
     Size size = MediaQuery.of(context).size;

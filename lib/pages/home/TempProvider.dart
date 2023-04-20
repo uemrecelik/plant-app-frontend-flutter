@@ -6,12 +6,14 @@ class TempProvider extends ChangeNotifier {
   String _plantName = 'Select Plant';
   String _optimumTemp = '';
   String _optimumHum = '';
+  String _latestUpdateDate = '';
 
   int get tempValue => _tempValue;
   int get humValue => _humValue;
   String get plantName => _plantName;
   String get optimumTemp => _optimumTemp;
   String get optimumHum => _optimumHum;
+  String get latestUpdateDate => _latestUpdateDate;
 
   set tempValue(int value) {
     _tempValue = value;
@@ -35,6 +37,11 @@ class TempProvider extends ChangeNotifier {
 
   set optimumTemp(String value) {
     _optimumTemp = value;
+    notifyListeners(); // Notify any listeners that the value has changed
+  }
+
+  set latestUpdateDate(String value) {
+    _latestUpdateDate = value;
     notifyListeners(); // Notify any listeners that the value has changed
   }
 }

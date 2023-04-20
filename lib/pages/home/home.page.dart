@@ -14,6 +14,7 @@ import 'package:provider/provider.dart';
 import 'TempProvider.dart';
 import 'componets/graphCard.componet.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -73,9 +74,11 @@ class _HomePageState extends State<HomePage> {
                       child: Center(
                         child: Column(
                           children: [
-                            SizedBox(height: 20),
+                            SizedBox(
+                              height: 10,
+                            ),
                             Padding(
-                              padding: const EdgeInsets.all(15.0),
+                              padding: const EdgeInsets.all(25.0),
                               child: Row(
                                 children: [
                                   graphCard(
@@ -90,7 +93,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(right: 145.0),
+                              padding: const EdgeInsets.only(right: 130.0),
                               child: Text.rich(
                                 TextSpan(
                                   text: 'Selected Plant: ',
@@ -169,7 +172,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             const SizedBox(
-                              height: 10,
+                              height: 25,
                             ),
                             PlantSlider(plantList: userPlants),
                           ],

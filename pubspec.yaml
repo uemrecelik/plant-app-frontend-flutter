@@ -35,6 +35,10 @@ dependencies:
   percent_indicator: ^3.4.0
   provider: ^6.0.5
   flutter_local_notifications: ^13.0.0
+  syncfusion_flutter_charts: ^21.1.35
+  roslib: ^0.0.3  
+  webview_flutter: ^1.0.3
+  control_pad: ^1.1.1+1
   
 
 
@@ -42,6 +46,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   google_fonts: ^4.0.3
+  numberpicker: ^2.1.1
 
 dev_dependencies:
   flutter_test:
