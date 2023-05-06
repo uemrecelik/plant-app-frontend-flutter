@@ -398,11 +398,16 @@ class NumberPickerModal extends StatefulWidget {
 }
 
 class _NumberPickerModalState extends State<NumberPickerModal> {
-  @override
-  Widget build(BuildContext context) {
-    int _selectedValue = widget.isTemp
+  late int _selectedValue;
+  void initState() {
+    super.initState();
+    _selectedValue = widget.isTemp
         ? widget.userPlant.optimumTemp
         : widget.userPlant.optimumHum;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Dialog(
       child: Container(
         padding: EdgeInsets.all(16),
